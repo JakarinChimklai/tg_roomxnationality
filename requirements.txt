@@ -2,5 +2,5 @@ streamlit
 pandas
 plotly-express
 datetime
-streamlit_autorefresh
+function
 st-gsheets-connection
