@@ -1,0 +1,6 @@
+streamlit
+pandas
+plotly-express
+datetime
+streamlit_autorefresh
+st-gsheets-connection
