@@ -1,5 +1,5 @@
 header.stAppHeader {
-    background: rgba(0, 0, 0, 0);
+    background: rgba(255, 255, 255, 0);
 }
 
 div.stMainBlockContainer {
@@ -13,5 +13,6 @@ div.st-key-app_title div.stHeading {
 div.st-key-app_title div.stHeading h1 {
     font-family: Source Sans Pro;
     line-height: 0.001;
-    font-size: 30px;
+    font-size: 35px;
+    color: #ffff
 }
