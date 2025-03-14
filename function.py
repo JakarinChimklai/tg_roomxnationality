@@ -1,4 +1,4 @@
-# example/st_app.py
+
 
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
@@ -33,7 +33,7 @@ def map_nationality(nationality):
         "Sri Lankan": "LKA", "Swedish": "SWE", "Swiss": "CHE", "Taiwanese": "TWN",
         "Thai": "THA", "The Republic Of Korea": "KOR", "The Russian Federation": "RUS",
         "The United Arab Emirates": "ARE", "Turkish": "TUR", "Turks and Caicos Islands": "TCA",
-        "Uzbek": "UZB", "Vanuatu": "VUT", "Vietnamese": "VNM", "Yemeni": "YEM"
+        "Uzbek": "UZB", "Vanuatu": "VUT", "Vietnamese": "VNM", "Yemeni": "YEM","Nepalese":"NPL"
     }
     
     # คืนค่าตัวย่อถ้าพบใน dictionary, ถ้าไม่พบให้ใช้ชื่อเดิม
