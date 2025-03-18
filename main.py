@@ -3,7 +3,6 @@ import pandas as pd
 from datetime import datetime
 from function import get_google_sheet_database, map_nationality
 
-
 st.set_page_config(layout="wide")
 st.markdown(
     """
@@ -34,43 +33,66 @@ sensitive = ["AUT", "BEL", "GBR", "HRV", "CZE", "DNK", "EST", "FIN", "FRA",
              "PRT", "ROU", "SVN", "ESP", "SWE", "CHE", "RUS", "TUR", "THA", "KOR"]
 
 nationality_map = {
-    "OTH": "OTHER","DZA": "Algerian","AGO": "Angolan","BEN": "Beninese","BWA": "Botswana","BFA": "Burkina Faso","BDI": "Burundi",
-    "CMR": "Cameroonian","CPV": "Cape Verdean","CAF": "Central African","TCD": "Chadian","COM": "Comoros","COD": "Congolese",
-    "DJI": "Djibouti","EGY": "Egyptian","GNQ": "Equatorial Guinean","ERI": "Eritrean","ETH": "Ethiopian","GAB": "Gabonese",
-    "GMB": "Gambian","GHA": "Ghanaian","GNB": "Guinea-Bissauan","GIN": "Guinean","CIV": "Ivory Coast","KEN": "Kenyan","LSO": "Lesothon",
-    "LBR": "Liberian","LBY": "Libyan","MDG": "Malagasy","MWI": "Malawian","MLI": "Maliian","MRT": "Mauritanian","MUS": "Mauritian",
-    "MYT": "Mayotte","MAR": "Moroccan","MOZ": "Mozambican","NAM": "Namibian","NGA": "Nigerian","REU": "Reunion Islander","RWA": "Rwandan",
-    "STP": "Sao Tome/Principe","SEN": "Senegalese","SYC": "Seychellois","SLE": "Sierra Leonean","SOM": "Somali","ZAF": "South African",
-    "SHN": "St. Helena","SDN": "Sudanese","SWZ": "Swazi","TZA": "Tanzanian","NER": "The Niger","TGO": "Togolese","TUN": "Tunisian",
-    "UGA": "Ugandan","ZMB": "Zambian","ZWE": "Zimbabwean","ATA": "Antarctica","AFG": "Afghan","ARM": "Armenian","AZE": "Azerbaijani",
-    "BHR": "Bahraini","BGD": "Bangladesh","BTN": "Bhutanese","BRN": "Brunei Darussalam","KHM": "Cambodian","HKG": "China-Hong Kong",
-    "CHN": "Chinese","CXR": "Christmas Island","CCK": "Cocos (Keeling) Islands","GEO": "Georgian","IND": "Indian","IDN": "Indonesian",
-    "IRN": "Irantan","IRQ": "Iraqi","ISR": "Israeli","JPN": "Japanese","JOR": "Jordanian","KAZ": "Kazakh","KWT": "Kuwaiti","KGZ": "Kyrgyz",
-    "LAO": "Lao","LBN": "Lebanese","MAC": "Macao","MYS": "Malasian","MDV": "Maldivian","MNG": "Mongolia","MMR": "Myanmar","NPL": "Nepalese",
-    "OMN": "Omani","PAK": "Pakistan","PSE": "Palestinian","PHL": "Philippine","QAT": "Qatar","SAU": "Saudi Arabian","SGP": "Singaporean",
-    "LKA": "Sri Lankan","SYR": "Syrian","TWN": "Taiwanese","TJK": "Tajik","THA": "Thai","PRK": "The Democralic People'S Republ",
-    "KOR": "The Republic Of Korea","ARE": "The United Arab Emirates","TUR": "Turkish","TKM": "Turkmen","UZB": "Uzbek","VNM": "Vietnamese",
-    "YEM": "Yemeni","ALB": "Albanian","AND": "andorain","AUT": "Austrian","BLR": "Belarusian","BEL": "Belgian","BIH": "Bosnia and Herzegovina",
-    "GBR": "British","BGR": "Bulgarian","MNE": "Crna Gora Montenegro","HRV": "Croatia","CYP": "Cypriot","CZE": "Czech","DNK": "Danish",
-    "EST": "Estonian","FRO": "Faeroes Islander","FIN": "Finnish","FRA": "French","DEU": "German","GIB": "Gibraltar","GRC": "Greek",
-    "HUN": "Hungarian","ISL": "Icelandic","IRL": "Irish","ITA": "Italian","LVA": "Latvian","LIE": "Liechtenstein","LTU": "Lithuanian",
-    "LUX": "Luxemburgerg","MLT": "Maltese","MDA": "Moldovan","NLD": "Netherlands","NOR": "Norway", "POL": "Polish", "PRT": "Portuguese",
-    "XKX": "Republic Of Kosovo","ROU": "Romanian","SMR": "San Marino","SRB": "Serbia","SVK": "Slovak","SVN": "Slovene","ESP": "Spanish",
-    "SWE": "Swedish","CHE": "Swiss","RSB": "The Former Yugoslav Republic","VAT": "The Holy See","RUS": "The Russian Federation","UKR": "Ukranian",
-    "MKD": "Yogoslav","USA": "American","AIA": "Anguilla","ATG": "Antiguan and Barbuda","ABW": "Aruba","BHS": "Bahamian","BRB": "Barbadian",
-    "BLZ": "Belizean","BMU": "Bermudan","CAN": "Canadian","CYM": "Cayman Islander","CRI": "Costa Rica","CUB": "Cuban","CUW": "Curacaoan",
-    "DMA": "Dominica","DOM": "Dominican","GRL": "Greenlander","GRD": "Grenadian","GLP": "Guadeloupean","GTM": "Guatemalan","HTI": "Haitian",
-    "HND": "Honduran","JAM": "Jamaican","MTQ": "Martinique","MEX": "Maxican","MSR": "Montserrat","ANT": "Netherlands Antilles","NIC": "Nicaraguan",
-    "PAN": "Panamanian","PRI": "Puerto Rican","LCA": "Saint Lucian","VCT": "Saint Vincent and The Grenadin","SLV": "Salvadoran",
-    "SPM": "St. Peirre and Miquelon","TTO": "Trinidad and Tobago","TCA": "Turks and Caicos Islands","VIR": "Virgin Islander","VGB": "Virgin Islands (British)",
-    "ASM": "America Samoa","AUS": "Australian","COK": "Cook Islander","TLS": "East Timor","FJI": "Fiji","PYF": "French Polynesia","GUM": "Guamanian",
-    "KIR": "Kiribatian","MNP": "Marianan","MHL": "Marshall Islands","NRU": "Nauruan","NZL": "New Zealander","NCL": "Newcaledonian","NIU": "Niue",
-    "NFK": "Norfolk Island","PLW": "Palau","PNG": "Papua New Guinea","WSM": "Samoan","SLB": "Solomon Islands","FSM": "The Federated States   Microne",
-    "TKL": "Tokelau","TON": "Tongan","TUV": "Tuvaluan","VUT": "Vanuatu","WLF": "Wallis and Futuna Islands","ARG": "Argentine","BOL": "Bolivian",
-    "BRA": "Brazilian","CHL": "Chilean","COL": "Colombian","ECU": "Ecuadorian","FLK": "Falkland Islands (Malvinas)","GUF": "French Guiana",
-    "GUY": "Guyanese","PRY": "Paraguayan","PER": "Peruvian","SUR": "Surinam","URY": "Uruguayan","VEN": "Venezuelan"
+    "OTH": "OTHER", "DZA": "Algerian", "AGO": "Angolan", "BEN": "Beninese", "BWA": "Botswana",
+    "BFA": "Burkina Faso", "BDI": "Burundi", "CMR": "Cameroonian", "CPV": "Cape Verdean",
+    "CAF": "Central African", "TCD": "Chadian", "COM": "Comoros", "COD": "Congolese",
+    "DJI": "Djibouti", "EGY": "Egyptian", "GNQ": "Equatorial Guinean", "ERI": "Eritrean",
+    "ETH": "Ethiopian", "GAB": "Gabonese", "GMB": "Gambian", "GHA": "Ghanaian",
+    "GNB": "Guinea-Bissauan", "GIN": "Guinean", "CIV": "Ivory Coast", "KEN": "Kenyan",
+    "LSO": "Lesothon", "LBR": "Liberian", "LBY": "Libyan", "MDG": "Malagasy", "MWI": "Malawian",
+    "MLI": "Maliian", "MRT": "Mauritanian", "MUS": "Mauritian", "MYT": "Mayotte",
+    "MAR": "Moroccan", "MOZ": "Mozambican", "NAM": "Namibian", "NGA": "Nigerian",
+    "REU": "Reunion Islander", "RWA": "Rwandan", "STP": "Sao Tome/Principe", "SEN": "Senegalese",
+    "SYC": "Seychellois", "SLE": "Sierra Leonean", "SOM": "Somali", "ZAF": "South African",
+    "SHN": "St. Helena", "SDN": "Sudanese", "SWZ": "Swazi", "TZA": "Tanzanian", "NER": "The Niger",
+    "TGO": "Togolese", "TUN": "Tunisian", "UGA": "Ugandan", "ZMB": "Zambian", "ZWE": "Zimbabwean",
+    "ATA": "Antarctica", "AFG": "Afghan", "ARM": "Armenian", "AZE": "Azerbaijani",
+    "BHR": "Bahraini", "BGD": "Bangladesh", "BTN": "Bhutanese", "BRN": "Brunei Darussalam",
+    "KHM": "Cambodian", "HKG": "China-Hong Kong", "CHN": "Chinese", "CXR": "Christmas Island",
+    "CCK": "Cocos (Keeling) Islands", "GEO": "Georgian", "IND": "Indian", "IDN": "Indonesian",
+    "IRN": "Irantan", "IRQ": "Iraqi", "ISR": "Israeli", "JPN": "Japanese", "JOR": "Jordanian",
+    "KAZ": "Kazakh", "KWT": "Kuwaiti", "KGZ": "Kyrgyz", "LAO": "Lao", "LBN": "Lebanese",
+    "MAC": "Macao", "MYS": "Malasian", "MDV": "Maldivian", "MNG": "Mongolia", "MMR": "Myanmar",
+    "NPL": "Nepalese", "OMN": "Omani", "PAK": "Pakistan", "PSE": "Palestinian", "PHL": "Philippine",
+    "QAT": "Qatar", "SAU": "Saudi Arabian", "SGP": "Singaporean", "LKA": "Sri Lankan",
+    "SYR": "Syrian", "TWN": "Taiwanese", "TJK": "Tajik", "THA": "Thai", "PRK": "The Democralic People'S Republ",
+    "KOR": "The Republic Of Korea", "ARE": "The United Arab Emirates", "TUR": "Turkish",
+    "TKM": "Turkmen", "UZB": "Uzbek", "VNM": "Vietnamese", "YEM": "Yemeni", "ALB": "Albanian",
+    "AND": "andorain", "AUT": "Austrian", "BLR": "Belarusian", "BEL": "Belgian",
+    "BIH": "Bosnia and Herzegovina", "GBR": "British", "BGR": "Bulgarian",
+    "MNE": "Crna Gora Montenegro", "HRV": "Croatia", "CYP": "Cypriot", "CZE": "Czech",
+    "DNK": "Danish", "EST": "Estonian", "FRO": "Faeroes Islander", "FIN": "Finnish",
+    "FRA": "French", "DEU": "German", "GIB": "Gibraltar", "GRC": "Greek",
+    "HUN": "Hungarian", "ISL": "Icelandic", "IRL": "Irish", "ITA": "Italian",
+    "LVA": "Latvian", "LIE": "Liechtenstein", "LTU": "Lithuanian", "LUX": "Luxemburgerg",
+    "MLT": "Maltese", "MDA": "Moldovan", "NLD": "Netherlands", "NOR": "Norway",
+    "POL": "Polish", "PRT": "Portuguese", "XKX": "Republic Of Kosovo", "ROU": "Romanian",
+    "SMR": "San Marino", "SRB": "Serbia", "SVK": "Slovak", "SVN": "Slovene",
+    "ESP": "Spanish", "SWE": "Swedish", "CHE": "Swiss", "RSB": "The Former Yugoslav Republic",
+    "VAT": "The Holy See", "RUS": "The Russian Federation", "UKR": "Ukranian",
+    "MKD": "Yogoslav", "USA": "American", "AIA": "Anguilla", "ATG": "Antiguan and Barbuda",
+    "ABW": "Aruba", "BHS": "Bahamian", "BRB": "Barbadian", "BLZ": "Belizean",
+    "BMU": "Bermudan", "CAN": "Canadian", "CYM": "Cayman Islander", "CRI": "Costa Rica",
+    "CUB": "Cuban", "CUW": "Curacaoan", "DMA": "Dominica", "DOM": "Dominican",
+    "GRL": "Greenlander", "GRD": "Grenadian", "GLP": "Guadeloupean", "GTM": "Guatemalan",
+    "HTI": "Haitian", "HND": "Honduran", "JAM": "Jamaican", "MTQ": "Martinique",
+    "MEX": "Maxican", "MSR": "Montserrat", "ANT": "Netherlands Antilles", "NIC": "Nicaraguan",
+    "PAN": "Panamanian", "PRI": "Puerto Rican", "LCA": "Saint Lucian",
+    "VCT": "Saint Vincent and The Grenadin", "SLV": "Salvadoran",
+    "SPM": "St. Peirre and Miquelon", "TTO": "Trinidad and Tobago", "TCA": "Turks and Caicos Islands",
+    "VIR": "Virgin Islander", "VGB": "Virgin Islands (British)", "ASM": "America Samoa",
+    "AUS": "Australian", "COK": "Cook Islander", "TLS": "East Timor", "FJI": "Fiji",
+    "PYF": "French Polynesia", "GUM": "Guamanian", "KIR": "Kiribatian",
+    "MNP": "Marianan", "MHL": "Marshall Islands", "NRU": "Nauruan", "NZL": "New Zealander",
+    "NCL": "Newcaledonian", "NIU": "Niue", "NFK": "Norfolk Island", "PLW": "Palau",
+    "PNG": "Papua New Guinea", "WSM": "Samoan", "SLB": "Solomon Islands", "FSM": "The Federated States   Microne",
+    "TKL": "Tokelau", "TON": "Tongan", "TUV": "Tuvaluan", "VUT": "Vanuatu",
+    "WLF": "Wallis and Futuna Islands", "ARG": "Argentine", "BOL": "Bolivian",
+    "BRA": "Brazilian", "CHL": "Chilean", "COL": "Colombian", "ECU": "Ecuadorian",
+    "FLK": "Falkland Islands (Malvinas)", "GUF": "French Guiana", "GUY": "Guyanese",
+    "PRY": "Paraguayan", "PER": "Peruvian", "SUR": "Surinam", "URY": "Uruguayan",
+    "VEN": "Venezuelan"
 }
-
 
 # Prepare Date Time
 if not pd.api.types.is_datetime64_any_dtype(df["date"]):
@@ -151,17 +173,14 @@ def display_floor_map(table_data, floor_label):
     # สร้าง DataFrame จาก table_data
     df_table = pd.DataFrame(table_data)
     
-    # สร้าง reverse mapping จาก nationality_map
-    # (จากชื่อเต็ม -> รหัสประเทศ) ให้ได้ mapping จากรหัสประเทศ -> ชื่อเต็ม
-    reverse_nationality_map = {v: k for k, v in nationality_map.items()}
-    
-    # สร้าง DataFrame สำหรับ tooltips โดยให้เซลล์ที่มีรหัสประเทศมี tooltip เป็นชื่อเต็ม
+    # สร้าง DataFrame สำหรับ tooltips โดยให้เซลล์ที่มีชื่อย่อของ nationality
+    # แสดงชื่อเต็มจาก dictionary nationality_map เมื่อ hover เมาส์
     tooltips_df = df_table.copy().astype(str)
     for i in tooltips_df.index:
         for j in tooltips_df.columns:
             cell_value = tooltips_df.at[i, j]
-            if cell_value in reverse_nationality_map:
-                tooltips_df.at[i, j] = reverse_nationality_map[cell_value]
+            if cell_value in nationality_map:
+                tooltips_df.at[i, j] = nationality_map[cell_value]
             else:
                 tooltips_df.at[i, j] = ""
     
