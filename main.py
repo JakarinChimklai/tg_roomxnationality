@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 from function import get_google_sheet_database, map_nationality
-
+import streamlit.components.v1 as components  # import components สำหรับ HTML
 
 st.set_page_config(layout="wide")
 st.markdown(
@@ -70,7 +70,6 @@ nationality_map = {
     "BRA": "Brazilian","CHL": "Chilean","COL": "Colombian","ECU": "Ecuadorian","FLK": "Falkland Islands (Malvinas)","GUF": "French Guiana",
     "GUY": "Guyanese","PRY": "Paraguayan","PER": "Peruvian","SUR": "Surinam","URY": "Uruguayan","VEN": "Venezuelan"
 }
-
 
 # Prepare Date Time
 if not pd.api.types.is_datetime64_any_dtype(df["date"]):
@@ -181,7 +180,8 @@ def display_floor_map(table_data, floor_label):
     styler = styler.set_tooltips(tooltips_df)
     
     st.markdown(f"**{floor_label}**")
-    st.write(styler.to_html(), unsafe_allow_html=True)
+    # ใช้ components.html() เพื่อแสดงผล HTML ที่ interactive ได้
+    components.html(styler.to_html(), height=600, scrolling=True)
 
 def update_table_with_nationality(table_data):
     """
