@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 from function import get_google_sheet_database, map_nationality
 
+
 st.set_page_config(layout="wide")
 st.markdown(
     """
