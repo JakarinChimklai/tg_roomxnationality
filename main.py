@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 from function import get_google_sheet_database, map_nationality
-import streamlit.components.v1 as components  # import components สำหรับ HTML
+import streamlit.components.v1 as components  # Import components สำหรับการแสดง HTML
 
 st.set_page_config(layout="wide")
 st.markdown(
@@ -180,7 +180,7 @@ def display_floor_map(table_data, floor_label):
     styler = styler.set_tooltips(tooltips_df)
     
     st.markdown(f"**{floor_label}**")
-    # ใช้ components.html() เพื่อแสดงผล HTML ที่ interactive ได้
+    # ใช้ components.html() แทน st.write() เพื่อให้ hover tooltip ทำงานได้
     components.html(styler.to_html(), height=600, scrolling=True)
 
 def update_table_with_nationality(table_data):
@@ -212,5 +212,4 @@ for floor_label in pill_selected_floor:
     floor_values = floor_mapping[floor_label]
     floor_table = generate_floors(floor_values, generic_table_data)
     updated_table = update_table_with_nationality(floor_table)
-    floor_number = int(floor_values[0]) - 10
     display_floor_map(updated_table, floor_label)
